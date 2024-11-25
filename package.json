@@ -1,5 +1,5 @@
 {
-  "name": "@breejs/later",
+  "name": "@rsegui/later",
   "description": "Maintained fork of later. Determine later (or previous) occurrences of recurring schedules",
   "version": "4.2.0",
   "author": "BunKat <bill@levelstory.com>",

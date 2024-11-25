@@ -1,4 +1,5 @@
 const pkg = require('../package.json');
+const { DateTime } = require('luxon');
 
 const later = {
   version: pkg.version
@@ -1281,6 +1282,11 @@ later.setInterval = function (fn, sched, timezone) {
 }; // setInterval()
 
 later.date = {};
+
+later.date.buildTZ = function (Y, M, D, h, m, s, timeZone) {
+  return new DateTime(Y, M, D, h, m, s).setZone(timeZone).toJSDate();
+};
+
 later.date.timezone = function (useLocalTime) {
   later.date.build = useLocalTime
     ? function (Y, M, D, h, m, s) {
@@ -1326,6 +1332,18 @@ later.date.next = function (Y, M, D, h, m, s) {
     h || 0,
     m || 0,
     s || 0
+  );
+};
+
+later.date.nextTZ = function (Y, M, D, h, m, s, timeZone) {
+  return later.date.buildTZ(
+    Y,
+    M !== undefined ? M - 1 : 0,
+    D !== undefined ? D : 1,
+    h || 0,
+    m || 0,
+    s || 0,
+    timeZone
   );
 };
 
